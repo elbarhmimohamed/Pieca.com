@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -19,6 +17,12 @@ class AuthViewModel extends GetxController {
   String? get user => _user.value?.email;
   final LocalStorageData localStorageData = Get.put(LocalStorageData());
   final ProfilViewModel profilViewModel = Get.put(ProfilViewModel());
+
+  Icon _icon = Icon(Icons.visibility_off);
+  Icon get icon => _icon;
+
+  bool _obscureText = true;
+  bool get obscureText => _obscureText;
 
   GlobalKey<FormState> globalKeylogin = GlobalKey();
 
@@ -115,7 +119,7 @@ class AuthViewModel extends GetxController {
           snackPosition: SnackPosition.BOTTOM,
         );
       }
-    } else {}
+    }
   }
 
   void saveUser(UserCredential user) async {
@@ -143,5 +147,19 @@ class AuthViewModel extends GetxController {
     } catch (e) {
       print(e.toString());
     }
+  }
+
+  changeIcon() {
+    if (_obscureText == true) {
+      _icon = Icon(
+        Icons.visibility,
+        color: Color(0xff1e88e5),
+      );
+      _obscureText = false;
+    } else {
+      _icon = Icon(Icons.visibility_off);
+      _obscureText = true;
+    }
+    update();
   }
 }

@@ -35,7 +35,7 @@ class AddAddress extends StatelessWidget {
                             }
                           },
                           helper: '',
-                          icon: Icon(null),
+                          icon: IconButton(onPressed: () {}, icon: Icon(null)),
                           input: TextInputType.name,
                         ),
                         CustomTextFiled(
@@ -52,7 +52,7 @@ class AddAddress extends StatelessWidget {
                             }
                           },
                           helper: '',
-                          icon: Icon(null),
+                          icon: IconButton(onPressed: () {}, icon: Icon(null)),
                         ),
                         CustomTextFiled(
                           hinttext: 'Adresse de livraison',
@@ -67,7 +67,7 @@ class AddAddress extends StatelessWidget {
                             }
                           },
                           helper: '',
-                          icon: Icon(null),
+                          icon: IconButton(onPressed: () {}, icon: Icon(null)),
                           input: TextInputType.name,
                         ),
                         Container(
@@ -89,7 +89,8 @@ class AddAddress extends StatelessWidget {
                                     }
                                   },
                                   helper: '',
-                                  icon: Icon(null),
+                                  icon: IconButton(
+                                      onPressed: () {}, icon: Icon(null)),
                                   input: TextInputType.name,
                                 ),
                               ),
@@ -110,7 +111,8 @@ class AddAddress extends StatelessWidget {
                                     }
                                   },
                                   helper: '',
-                                  icon: Icon(null),
+                                  icon: IconButton(
+                                      onPressed: () {}, icon: Icon(null)),
                                   input: TextInputType.name,
                                 ),
                               ),

@@ -51,16 +51,15 @@ class Signup_View extends GetWidget<AuthViewModel> {
                           controller.name = value;
                         },
                         onvalide: (value) {
-                          if (Value == null) {
-                            print('ERROR');
+                          if (value!.isEmpty) {
+                            return 'Vous devez saisir le nom ';
                           }
                         },
                         input: TextInputType.name,
-                        icon: Icon(Icons.person_outline),
+                        icon: IconButton(
+                            onPressed: () {}, icon: Icon(Icons.person_outline)),
                         labeltext: 'Nom complet *',
                         hinttext: 'entrez votre nom complet',
-                        helper: '',
-                        initval: '',
                       ),
                       //email-------------------------------
                       CustomTextFiled(
@@ -68,16 +67,15 @@ class Signup_View extends GetWidget<AuthViewModel> {
                           controller.email = value;
                         },
                         onvalide: (value) {
-                          if (Value == null) {
-                            print('ERROR');
+                          if (value!.isEmpty) {
+                            return 'Vous devez saisir l\'Email';
                           }
                         },
                         input: TextInputType.emailAddress,
-                        icon: Icon(Icons.mail_outline),
+                        icon: IconButton(
+                            onPressed: () {}, icon: Icon(Icons.mail_outline)),
                         labeltext: 'Email * ',
                         hinttext: 'entrez votre email',
-                        initval: '',
-                        helper: '',
                       ),
 
                       //password-------------------------------
@@ -87,16 +85,23 @@ class Signup_View extends GetWidget<AuthViewModel> {
                           controller.password = value;
                         },
                         onvalide: (value) {
-                          if (Value == null) {
-                            print('ERROR');
+                          if (value!.isEmpty) {
+                            return 'Vous devez saisir le mot de passe';
+                          }
+                          if (value.isNotEmpty) {
+                            if (value.length < 6) {
+                              return 'Vous devez saisir au moins 6 caracréres ';
+                            }
                           }
                         },
                         input: TextInputType.text,
-                        icon: Icon(Icons.lock_outline),
+                        icon: IconButton(
+                            onPressed: () {
+                              controller.changeIcon();
+                            },
+                            icon: controller.icon),
                         labeltext: 'Mot de passe *',
-                        hinttext: 'entrez votre mot de passe',
-                        helper: '',
-                        initval: '',
+                        hinttext: '******',
                       ),
 
                       //confirmation of password-------------------------------
@@ -106,16 +111,23 @@ class Signup_View extends GetWidget<AuthViewModel> {
                           controller.password_confirmation = value;
                         },
                         onvalide: (value) {
-                          if (Value == null) {
-                            print('ERROR');
+                          if (value!.isEmpty) {
+                            return 'Vous devez confirmer votre mot de passe';
+                          }
+                          if (controller.password != null) {
+                            if (controller.password != value) {
+                              return 'Vous devez saisir méme mot de passe';
+                            }
                           }
                         },
                         input: TextInputType.text,
-                        icon: Icon(Icons.lock_outline),
+                        icon: IconButton(
+                            onPressed: () {
+                              controller.changeIcon();
+                            },
+                            icon: controller.icon),
                         labeltext: 'confirmez votre mot de passe *',
-                        hinttext: 'confirmez votre mot de passe',
-                        helper: '',
-                        initval: '',
+                        hinttext: '******',
                       ),
 
                       //button
@@ -170,48 +182,5 @@ class Signup_View extends GetWidget<AuthViewModel> {
             ),
           ),
         ));
-  }
-
-  Widget Radiocheck() {
-    return GetBuilder<SignupViewModel>(
-      builder: (controller) => Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
-            children: [
-              Radio(
-                value: 1,
-                groupValue: controller.roleValue,
-                onChanged: (value) {
-                  controller.ChangeSelectedValue(1);
-                },
-                activeColor: Colors.blue,
-              ),
-              Text(
-                'Client',
-                style: TextStyle(fontSize: 16),
-              ),
-            ],
-          ),
-          Row(
-            children: [
-              Radio(
-                value: 2,
-                groupValue: controller.roleValue,
-                onChanged: (value) {
-                  controller.ChangeSelectedValue(2);
-                  // controller.role = 'Fournisseurs' ,
-                },
-                activeColor: Colors.blue,
-              ),
-              Text(
-                'Fournisseurs',
-                style: TextStyle(fontSize: 16),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
   }
 }

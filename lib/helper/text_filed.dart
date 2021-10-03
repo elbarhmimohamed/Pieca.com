@@ -14,7 +14,7 @@ class CustomTextFiled extends StatelessWidget {
   final String labeltext;
   final String hinttext;
 
-  final Icon icon;
+  final IconButton icon;
   final TextInputType input;
   final bool obscuretext;
   final String? helper;

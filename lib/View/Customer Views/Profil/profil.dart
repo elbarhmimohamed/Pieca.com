@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:pieca/View/Auth/login.dart';
+import 'package:pieca/View/Customer%20Views/Profil/edit_profil.dart';
 import 'package:pieca/View/Customer%20Views/Profil/iconButtonNavigat.dart';
 import 'package:pieca/View/home/components/custom_text.dart';
 import 'package:pieca/View/home/homeView.dart';
@@ -90,7 +91,9 @@ class ProfilView extends GetWidget<AuthViewModel> {
                           color: Colors.teal[400],
                         ),
                         text: 'Modifier le compte',
-                        onpress: () {},
+                        onpress: () {
+                          Get.to(() => EditProfilView());
+                        },
                       ),
                       SizedBox(
                         height: size.height * .03,

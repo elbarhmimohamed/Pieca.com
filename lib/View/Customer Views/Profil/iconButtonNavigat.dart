@@ -7,7 +7,7 @@ class IconButtonNavigat extends StatelessWidget {
 
   final Icon icon;
 
-  final Function() onpress;
+  final void Function() onpress;
 
   IconButtonNavigat(
       {this.text = '', required this.icon, required this.onpress});

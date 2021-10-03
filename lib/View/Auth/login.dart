@@ -71,15 +71,17 @@ class Login_View extends GetWidget<AuthViewModel> {
                             input: TextInputType.emailAddress,
                             labeltext: 'Email',
                             hinttext: 'entrer votre email',
-                            icon: Icon(Icons.mail_outlined),
+                            icon: IconButton(
+                                onPressed: () {},
+                                icon: Icon(Icons.mail_outline)),
                           ),
 
                           SizedBox(
-                            height: 20,
+                            height: size.height * .01,
                           ),
                           //password-------------------------------
                           CustomTextFiled(
-                            obscuretext: true,
+                            obscuretext: controller.obscureText,
                             onvalide: (value) {
                               if (value!.isEmpty) {
                                 return 'Vous devez saisir l\'Email';
@@ -91,7 +93,11 @@ class Login_View extends GetWidget<AuthViewModel> {
                             input: TextInputType.text,
                             labeltext: 'Mot de passe',
                             hinttext: 'entrer votre mot de passe',
-                            icon: Icon(Icons.lock_outline),
+                            icon: IconButton(
+                                onPressed: () {
+                                  controller.changeIcon();
+                                },
+                                icon: controller.icon),
                             helper: '',
                           ),
 
@@ -139,7 +145,7 @@ class Login_View extends GetWidget<AuthViewModel> {
                               borderRadius: BorderRadius.circular(30),
                               child: FlatButton(
                                   padding: EdgeInsets.symmetric(
-                                      vertical: 14, horizontal: 50),
+                                      vertical: 16, horizontal: 40),
                                   color: Color(0xff709BE4),
                                   onPressed: () {
                                     // _formkey.currentState?.save();
@@ -147,18 +153,20 @@ class Login_View extends GetWidget<AuthViewModel> {
                                     controller.LoginWithEmainAndPassword();
                                     //}
                                   },
-                                  child: Text('Se connecter',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 18,
-                                      ))),
+                                  child: CustomText(
+                                    text: 'Se connecter',
+                                    color: Colors.white,
+                                    fontSize: 16,
+                                    alignment: Alignment.center,
+                                  )),
                             ),
                           ),
-                          SizedBox(),
-                          Text(
-                            '-OU-',
-                            style: TextStyle(color: Colors.grey),
-                          ),
+                          CustomText(
+                            text: '-OU-',
+                            color: Colors.grey,
+                            alignment: Alignment.center,
+                            fontSize: 14,
+                          )
                         ],
                       ),
                     ),
@@ -182,14 +190,11 @@ class Login_View extends GetWidget<AuthViewModel> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Image.asset("assets/images/google.png"),
-                                SizedBox(
-                                  width: 20,
+                                CustomText(
+                                  text: 'Se connecter avec Google',
+                                  color: Colors.grey,
+                                  fontSize: 15,
                                 ),
-                                Text('Se connecter avec Google',
-                                    style: TextStyle(
-                                      color: Colors.grey,
-                                      fontSize: 15,
-                                    )),
                               ],
                             ),
                           )),
