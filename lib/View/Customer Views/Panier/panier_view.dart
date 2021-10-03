@@ -26,7 +26,7 @@ class PanierView extends GetWidget<HomeViewModel> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         SvgPicture.asset(
-                          'assets/images/addcart.svg',
+                          'assets/images/cart1.svg',
                           width: size.width * .7,
                         ),
                         SizedBox(

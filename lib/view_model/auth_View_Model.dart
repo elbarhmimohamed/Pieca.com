@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:pieca/Model/user_model.dart';
 import 'package:pieca/View/home/homeView.dart';
@@ -18,11 +20,21 @@ class AuthViewModel extends GetxController {
   final LocalStorageData localStorageData = Get.put(LocalStorageData());
   final ProfilViewModel profilViewModel = Get.put(ProfilViewModel());
 
-  Icon _icon = Icon(Icons.visibility_off);
-  Icon get icon => _icon;
+  Icon _iconLogin = Icon(Icons.visibility_off);
+  Icon get iconLogin => _iconLogin;
+  Icon _iconpassword = Icon(Icons.visibility_off);
+  Icon get iconpassword => _iconpassword;
+  Icon _iconconfirmation = Icon(Icons.visibility_off);
+  Icon get iconconfirmation => _iconconfirmation;
 
-  bool _obscureText = true;
-  bool get obscureText => _obscureText;
+  bool _obscureTextLogin = true;
+  bool get obscureTextLogin => _obscureTextLogin;
+
+  bool _obscureTextpassword = true;
+  bool get obscureTextpassword => _obscureTextpassword;
+
+  bool _obscureTextconfirmation = true;
+  bool get obscureTextconfirmation => _obscureTextconfirmation;
 
   GlobalKey<FormState> globalKeylogin = GlobalKey();
 
@@ -149,16 +161,38 @@ class AuthViewModel extends GetxController {
     }
   }
 
-  changeIcon() {
-    if (_obscureText == true) {
-      _icon = Icon(
+  changeIconLogin() {
+    if (_obscureTextLogin == true) {
+      _iconLogin = Icon(
         Icons.visibility,
         color: Color(0xff1e88e5),
       );
-      _obscureText = false;
+      _obscureTextLogin = false;
     } else {
-      _icon = Icon(Icons.visibility_off);
-      _obscureText = true;
+      _iconLogin = Icon(Icons.visibility_off);
+      _obscureTextLogin = true;
+    }
+    update();
+  }
+
+  changeIconPassword() {
+    if (_obscureTextpassword == true) {
+      _iconpassword = Icon(Icons.visibility, color: Color(0xff709BE4));
+      _obscureTextpassword = false;
+    } else {
+      _iconpassword = Icon(Icons.visibility_off);
+      _obscureTextpassword = true;
+    }
+    update();
+  }
+
+  changeIconConfirmation() {
+    if (_obscureTextconfirmation == true) {
+      _iconconfirmation = Icon(Icons.visibility, color: Color(0xff709BE4));
+      _obscureTextconfirmation = false;
+    } else {
+      _iconconfirmation = Icon(Icons.visibility_off);
+      _obscureTextconfirmation = true;
     }
     update();
   }

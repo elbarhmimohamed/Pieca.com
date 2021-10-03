@@ -81,7 +81,7 @@ class Login_View extends GetWidget<AuthViewModel> {
                           ),
                           //password-------------------------------
                           CustomTextFiled(
-                            obscuretext: controller.obscureText,
+                            obscuretext: controller.obscureTextLogin,
                             onvalide: (value) {
                               if (value!.isEmpty) {
                                 return 'Vous devez saisir l\'Email';
@@ -94,10 +94,11 @@ class Login_View extends GetWidget<AuthViewModel> {
                             labeltext: 'Mot de passe',
                             hinttext: 'entrer votre mot de passe',
                             icon: IconButton(
-                                onPressed: () {
-                                  controller.changeIcon();
-                                },
-                                icon: controller.icon),
+                              onPressed: () {
+                                controller.changeIconLogin();
+                              },
+                              icon: controller.iconLogin,
+                            ),
                             helper: '',
                           ),
 
@@ -132,7 +133,9 @@ class Login_View extends GetWidget<AuthViewModel> {
                                     color: Color(0xff1e88e5),
                                   ),
                                   recognizer: TapGestureRecognizer()
-                                    ..onTap = () => Get.to(Signup_View())),
+                                    ..onTap = () {
+                                      Get.off(() => Signup_View());
+                                    }),
                             ],
                           )),
 
