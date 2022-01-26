@@ -18,13 +18,17 @@ class HomeViewModel extends GetxController {
   List<ProductModel> _productModel = [];
   List<ProductModel> get productModel => _productModel;
 
+  List<ProductModel> _products = [];
+  List<ProductModel> get products => _products;
+
   HomeViewModel() {
     getCategory();
     getPRoduct();
+    //getprod();
   }
 
   getCategory() async {
-    _loding.value = true;
+    //_loding.value = true;
     Homeservice().getCategory().then((value) {
       if (value == null) {
         return;
@@ -35,20 +39,36 @@ class HomeViewModel extends GetxController {
       //////////////
       update();
     });
-    _loding.value = false;
+    //_loding.value = false;
   }
 
-  getPRoduct() async {
+  void getPRoduct() async {
+    print("dkhel1");
     _loding.value = true;
     Homeservice().getProduct().then((value) {
-      if (value == null) {
-        return;
-      }
+      print("dkhel2");
+
       _productModel = value.map((e) => ProductModel.fromJson(e)).toList();
 
       print('product lenght = ' + _productModel.length.toString());
       update();
+
       _loding.value = false;
     });
+  }
+
+  getprod() {
+    //_loding.value = true;
+    ProductModel prod = new ProductModel(
+        //idProduct: '1',
+        name: 'moteur',
+        image:
+            "https://firebasestorage.googleapis.com/v0/b/pieca-daa64.appspot.com/o/mm.png?alt=media&token=116ebd31-3c85-48c3-bd3f-cbc5c5c6883d",
+        descreption: 'azerty',
+        prix: 1000,
+        stock: 100);
+    this._productModel.add(prod);
+    update();
+    //_loding.value = true;
   }
 }

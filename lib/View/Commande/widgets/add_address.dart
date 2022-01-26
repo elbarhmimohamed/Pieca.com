@@ -25,12 +25,12 @@ class AddAddress extends StatelessWidget {
                         CustomTextFiled(
                           hinttext: 'Nom du contact',
                           labeltext: 'Nom du contact',
-                          initval: controller.userModel!.userName,
+                          initval: controller.userModel.userName,
                           onsave: (value) {
                             controller.name = value;
                           },
                           onvalide: (value) {
-                            if (value!.isEmpty) {
+                            if (value.isEmpty) {
                               return 'Vous devez saisir un nom de contact';
                             }
                           },
@@ -47,7 +47,7 @@ class AddAddress extends StatelessWidget {
                             controller.tele = value;
                           },
                           onvalide: (value) {
-                            if (value!.isEmpty) {
+                            if (value.isEmpty) {
                               return 'Vous devez saisir un numéro de téléphone portable';
                             }
                           },
@@ -62,7 +62,7 @@ class AddAddress extends StatelessWidget {
                             controller.adress = value;
                           },
                           onvalide: (value) {
-                            if (value!.isEmpty) {
+                            if (value.isEmpty) {
                               return 'Vous devez saisir une adresse valide';
                             }
                           },
@@ -84,7 +84,7 @@ class AddAddress extends StatelessWidget {
                                     controller.city = value;
                                   },
                                   onvalide: (value) {
-                                    if (value!.isEmpty) {
+                                    if (value.isEmpty) {
                                       return 'Vous devez saisir une ville valide';
                                     }
                                   },
@@ -106,7 +106,7 @@ class AddAddress extends StatelessWidget {
                                     controller.code = value;
                                   },
                                   onvalide: (value) {
-                                    if (value!.isEmpty) {
+                                    if (value.isEmpty) {
                                       return 'Vous devez saisir un code postal valide';
                                     }
                                   },

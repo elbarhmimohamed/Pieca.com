@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pieca/View/Customer%20Views/Commande/widgets/commande_succes.dart';
 import 'package:pieca/View/Customer%20Views/Commande/widgets/payment.dart';
 import 'package:pieca/View/home/components/custom_text.dart';
 import 'package:pieca/View/home/homeView.dart';
@@ -14,7 +15,7 @@ import 'widgets/delevery_time.dart';
 import 'widgets/summary.dart';
 
 class CommandeView extends GetWidget<CommandeViewModel> {
-  const CommandeView({Key? key}) : super(key: key);
+  const CommandeView({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -183,7 +184,8 @@ class CommandeView extends GetWidget<CommandeViewModel> {
                                         controller.index < 3
                                             ? controller.changeindex(
                                                 controller.index + 1)
-                                            : Get.offAll(() => HomeView());
+                                            : Get.offAll(
+                                                () => CommanedSucces());
                                         // controller.index == 1
                                         //? controller.setadressdata()
                                         //   : print('null');

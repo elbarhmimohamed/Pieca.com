@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pieca/View/Auth/login.dart';
 import 'package:pieca/View/Auth/Signup/signup_view_model.dart';
+import 'package:pieca/View/home/components/custom_text.dart';
 import 'package:pieca/helper/text_filed.dart';
 import 'package:pieca/View/home/homeView.dart';
 import 'package:pieca/view_model/auth_View_Model.dart';
@@ -53,7 +54,7 @@ class Signup_View extends GetWidget<AuthViewModel> {
                               controller.name = value;
                             },
                             onvalide: (value) {
-                              if (value!.isEmpty) {
+                              if (value.isEmpty) {
                                 return 'Vous devez saisir le nom ';
                               }
                             },
@@ -70,7 +71,7 @@ class Signup_View extends GetWidget<AuthViewModel> {
                               controller.email = value;
                             },
                             onvalide: (value) {
-                              if (value!.isEmpty) {
+                              if (value.isEmpty) {
                                 return 'Vous devez saisir l\'Email';
                               }
                             },
@@ -81,7 +82,31 @@ class Signup_View extends GetWidget<AuthViewModel> {
                             labeltext: 'Email * ',
                             hinttext: 'entrez votre email',
                           ),
+                          //----------role
 
+                          SizedBox(
+                            height: size.height * .02,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              CustomText(
+                                text: 'Etes-vous un fournisseur ?',
+                                maxLine: 2,
+                              ),
+                              Switch(
+                                activeColor: Color(0xff709BE4),
+                                value: controller.roleval,
+                                onChanged: (value) {
+                                  controller.roleval
+                                      ? controller.changerole(false)
+                                      : controller.changerole(true);
+
+                                  print(controller.role.toString());
+                                },
+                              ),
+                            ],
+                          ),
                           //password-------------------------------
                           CustomTextFiled(
                             obscuretext: controller.obscureTextpassword,
@@ -89,7 +114,7 @@ class Signup_View extends GetWidget<AuthViewModel> {
                               controller.password = value;
                             },
                             onvalide: (value) {
-                              if (value!.isEmpty) {
+                              if (value.isEmpty) {
                                 return 'Vous devez saisir le mot de passe';
                               }
                               if (value.isNotEmpty) {
@@ -115,7 +140,7 @@ class Signup_View extends GetWidget<AuthViewModel> {
                               controller.password_confirmation = value;
                             },
                             onvalide: (value) {
-                              if (value!.isEmpty) {
+                              if (value.isEmpty) {
                                 return 'Vous devez confirmer votre mot de passe';
                               }
                               if (controller.password != null) {
@@ -147,8 +172,8 @@ class Signup_View extends GetWidget<AuthViewModel> {
                                       vertical: 16, horizontal: 50),
                                   color: Colors.blue,
                                   onPressed: () {
-                                    _formkey.currentState!.save();
-                                    if (_formkey.currentState!.validate()) {
+                                    _formkey.currentState.save();
+                                    if (_formkey.currentState.validate()) {
                                       controller.SignUpWithEmainAndPassword();
                                     }
                                   },

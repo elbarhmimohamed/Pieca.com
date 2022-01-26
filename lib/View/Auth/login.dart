@@ -61,12 +61,12 @@ class Login_View extends GetWidget<AuthViewModel> {
                           //email-------------------------------
                           CustomTextFiled(
                             onvalide: (value) {
-                              if (value!.isEmpty) {
+                              if (value.isEmpty) {
                                 return 'Vous devez saisir l\'Email';
                               }
                             },
                             onsave: (value) {
-                              controller.email = value!;
+                              controller.email = value;
                             },
                             input: TextInputType.emailAddress,
                             labeltext: 'Email',
@@ -83,7 +83,7 @@ class Login_View extends GetWidget<AuthViewModel> {
                           CustomTextFiled(
                             obscuretext: controller.obscureTextLogin,
                             onvalide: (value) {
-                              if (value!.isEmpty) {
+                              if (value.isEmpty) {
                                 return 'Vous devez saisir l\'Email';
                               }
                             },

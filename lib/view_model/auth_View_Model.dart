@@ -1,3 +1,6 @@
+import 'dart:ffi';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -11,14 +14,21 @@ import 'package:pieca/service/firestore_user.dart';
 import 'package:pieca/view_model/profil_view_model.dart';
 
 class AuthViewModel extends GetxController {
-  GoogleSignIn? _googleSignIn = GoogleSignIn(scopes: ['email']);
+  GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email']);
   FirebaseAuth _auth = FirebaseAuth.instance;
-  String? email, password, name, role, password_confirmation;
+  String email, password, name, password_confirmation;
 
   Rxn<User> _user = Rxn<User>();
-  String? get user => _user.value?.email;
+  String get user => _user.value?.email;
+
   final LocalStorageData localStorageData = Get.put(LocalStorageData());
   final ProfilViewModel profilViewModel = Get.put(ProfilViewModel());
+
+  String _role = 'Client';
+  String get role => _role;
+
+  bool _roleval = false;
+  bool get roleval => _roleval;
 
   Icon _iconLogin = Icon(Icons.visibility_off);
   Icon get iconLogin => _iconLogin;
@@ -49,7 +59,7 @@ class AuthViewModel extends GetxController {
     print(_auth.currentUser);
     _user.bindStream(_auth.authStateChanges());
     if (_auth.currentUser != null) {
-      getCurrentUserData(_auth.currentUser!.uid);
+      getCurrentUserData(_auth.currentUser.uid);
     }
   }
 
@@ -63,11 +73,22 @@ class AuthViewModel extends GetxController {
     super.onClose();
   }
 
+  void changerole(bool value) {
+    if (value) {
+      _role = 'Fournisseur';
+      _roleval = true;
+    } else {
+      _role = 'Client';
+      _roleval = false;
+    }
+    update();
+  }
+
   void googleSignInMethod() async {
-    final GoogleSignInAccount? googleUser = await _googleSignIn!.signIn();
+    final GoogleSignInAccount googleUser = await _googleSignIn.signIn();
     print(googleUser);
     GoogleSignInAuthentication googleSignInAuthentication =
-        await googleUser!.authentication;
+        await googleUser.authentication;
 
     final AuthCredential credential = GoogleAuthProvider.credential(
       idToken: googleSignInAuthentication.idToken,
@@ -76,15 +97,15 @@ class AuthViewModel extends GetxController {
 
     await _auth.signInWithCredential(credential).then((user) async {
       profilViewModel.loding.value = true;
-      UserModel userModel = UserModel(
-        userId: user.user!.uid,
-        userName: user.user!.displayName,
-        email: user.user!.email,
+      UserModel userModel1 = UserModel(
+        userId: user.user.uid,
+        userName: user.user.displayName,
+        email: user.user.email,
         role: 'Client',
         //phone: ''
       );
-      await FireStoreUser().addUserToFirebase(userModel);
-      getCurrentUserData(user.user!.uid);
+      await FireStoreUser().addUserToFirebase(userModel1);
+      getCurrentUserData(user.user.uid);
       profilViewModel.loding.value = false;
 
       Get.offAll(() => HomeView());
@@ -92,13 +113,13 @@ class AuthViewModel extends GetxController {
   }
 
   void LoginWithEmainAndPassword() async {
-    globalKeylogin.currentState!.save();
-    if (globalKeylogin.currentState!.validate()) {
+    globalKeylogin.currentState.save();
+    if (globalKeylogin.currentState.validate()) {
       try {
         await _auth
-            .signInWithEmailAndPassword(email: email!, password: password!)
-            .then((value) async {
-          getCurrentUserData(value.user!.uid);
+            .signInWithEmailAndPassword(email: email, password: password)
+            .then((user) async {
+          getCurrentUserData(user.user.uid);
         });
         Get.offAll(() => HomeView());
       } catch (e) {
@@ -116,10 +137,10 @@ class AuthViewModel extends GetxController {
     if (password == password_confirmation) {
       try {
         await _auth
-            .createUserWithEmailAndPassword(email: email!, password: password!)
+            .createUserWithEmailAndPassword(email: email, password: password)
             .then((user) async {
           saveUser(user);
-          getCurrentUserData(user.user!.uid);
+          getCurrentUserData(user.user.uid);
         });
         Get.offAll(() => HomeView());
       } catch (e) {
@@ -136,10 +157,10 @@ class AuthViewModel extends GetxController {
 
   void saveUser(UserCredential user) async {
     UserModel userModel = UserModel(
-      userId: user.user!.uid,
+      userId: user.user.uid,
       userName: name,
       email: email,
-      role: 'Client',
+      role: role,
       //phone: ''
     );
     await FireStoreUser().addUserToFirebase(userModel);
@@ -152,8 +173,8 @@ class AuthViewModel extends GetxController {
 
   void getCurrentUserData(String uid) async {
     try {
-      await FireStoreUser().GetUserById(uid).then((value) {
-        setUSer(UserModel.fromJson(value.data() as Map<dynamic, dynamic>));
+      await FireStoreUser().getUserById(uid).then((value) {
+        setUSer(UserModel.fromJson(value.data() as Map<String, dynamic>));
         profilViewModel.getCurrentUser();
       });
     } catch (e) {

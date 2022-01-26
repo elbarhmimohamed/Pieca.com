@@ -43,8 +43,8 @@ class EditProfilView extends GetWidget<ProfilViewModel> {
                       hinttext: 'Nom',
                       icon: IconButton(onPressed: () {}, icon: Icon(null)),
                       input: TextInputType.text,
-                      onsave: (String? value) {},
-                      onvalide: (String? value) {},
+                      onsave: (String value) {},
+                      onvalide: (String value) {},
                     ),
                     SizedBox(
                       height: size.height * .01,
@@ -54,8 +54,8 @@ class EditProfilView extends GetWidget<ProfilViewModel> {
                       hinttext: 'Email',
                       icon: IconButton(onPressed: () {}, icon: Icon(null)),
                       input: TextInputType.text,
-                      onsave: (String? value) {},
-                      onvalide: (String? value) {},
+                      onsave: (String value) {},
+                      onvalide: (String value) {},
                     ),
                     SizedBox(
                       height: size.height * .01,
@@ -65,8 +65,8 @@ class EditProfilView extends GetWidget<ProfilViewModel> {
                       hinttext: '********',
                       icon: IconButton(onPressed: () {}, icon: Icon(null)),
                       input: TextInputType.text,
-                      onsave: (String? value) {},
-                      onvalide: (String? value) {},
+                      onsave: (String value) {},
+                      onvalide: (String value) {},
                     ),
                     SizedBox(
                       height: size.height * .01,

@@ -6,7 +6,7 @@ import 'package:pieca/helper/constant.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LocalStorageData extends GetxController {
-  Future<UserModel?> get getUser async {
+  Future<UserModel> get getUser async {
     try {
       UserModel userModel = await getUserData();
 
@@ -19,7 +19,7 @@ class LocalStorageData extends GetxController {
   getUserData() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     var value = preferences.getString(CACHED_USER_DATA);
-    return UserModel.fromJson(json.decode(value!));
+    return UserModel.fromJson(json.decode(value));
   }
 
   setUserData(UserModel userModel) async {

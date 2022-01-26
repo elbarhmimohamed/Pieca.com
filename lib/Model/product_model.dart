@@ -4,24 +4,29 @@ class ProductModel {
   String idProduct, name, descreption, image;
   int prix, stock;
 
+  String nameCat, idUser;
+
   ProductModel({
-    required this.idProduct,
-    required this.name,
-    required this.image,
-    required this.descreption,
-    required this.prix,
-    required this.stock,
+    this.idProduct,
+    this.name,
+    this.image,
+    this.descreption,
+    this.prix,
+    this.stock,
+    this.nameCat,
+    this.idUser,
   });
 
-  factory ProductModel.fromJson(QueryDocumentSnapshot<Object?> map) =>
+  factory ProductModel.fromJson(QueryDocumentSnapshot<Object> map) =>
       ProductModel(
-        idProduct: map['id'],
-        name: map['name'],
-        image: map['image'],
-        descreption: map['descreption'],
-        prix: map['prix'],
-        stock: map['stock'],
-      );
+          idProduct: map['idProduct'],
+          name: map['name'],
+          image: map['image'],
+          descreption: map['descreption'],
+          prix: map['prix'],
+          stock: map['stock'],
+          nameCat: map['nameCat'],
+          idUser: map['idUser']);
 
   toJson() {
     return {
@@ -31,6 +36,8 @@ class ProductModel {
       'prix': prix,
       'stock': stock,
       'idProduct': idProduct,
+      'nameCat': nameCat,
+      'idUser': idUser
     };
   }
 }

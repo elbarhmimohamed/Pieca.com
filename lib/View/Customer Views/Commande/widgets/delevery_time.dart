@@ -31,7 +31,7 @@ class DeliveryTime extends StatelessWidget {
                     RadioListTile<Delivry>(
                       value: Delivry.StandrdDelivry,
                       groupValue: controller.delivry,
-                      onChanged: (Delivry? value) {
+                      onChanged: (Delivry value) {
                         controller.changdelivry(value);
                         controller.changdelivrychose(value);
                         controller.changdIsOk(false);
@@ -53,7 +53,7 @@ class DeliveryTime extends StatelessWidget {
                     RadioListTile<Delivry>(
                       value: Delivry.NextDay,
                       groupValue: controller.delivry,
-                      onChanged: (Delivry? value) {
+                      onChanged: (Delivry value) {
                         controller.changdelivry(value);
                         controller.changdelivrychose(value);
                         controller.changdIsOk(false);
@@ -76,7 +76,7 @@ class DeliveryTime extends StatelessWidget {
                     RadioListTile<Delivry>(
                       value: Delivry.Delivrychoosing,
                       groupValue: controller.delivry,
-                      onChanged: (Delivry? value) {
+                      onChanged: (Delivry value) {
                         controller.changdelivry(value);
                         controller.changdelivrychose(value);
                         controller.changdIsOk(true);
@@ -122,7 +122,7 @@ class DeliveryTime extends StatelessWidget {
                                     '/' +
                                     value.year.toString());
                               },
-                              validator: (DateTime? e) {
+                              validator: (DateTime e) {
                                 if (e.isNull) {
                                   controller.changgetstatusofbutton(false);
                                   return 'Vous devez choisir un date';

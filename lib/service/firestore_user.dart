@@ -11,7 +11,12 @@ class FireStoreUser {
         .set(userModel.toMap());
   }
 
-  Future<DocumentSnapshot> GetUserById(String id) async {
+  Future<DocumentSnapshot> getUserById(String id) async {
     return await _userCollectionRef.doc(id).get();
+  }
+
+  Future<List<QueryDocumentSnapshot>> getUsers() async {
+    var value = await _userCollectionRef.get();
+    return value.docs;
   }
 }

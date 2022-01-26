@@ -9,8 +9,7 @@ class IconButtonNavigat extends StatelessWidget {
 
   final void Function() onpress;
 
-  IconButtonNavigat(
-      {this.text = '', required this.icon, required this.onpress});
+  IconButtonNavigat({this.text = '', this.icon, this.onpress});
 
   @override
   Widget build(BuildContext context) {

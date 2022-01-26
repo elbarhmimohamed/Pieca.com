@@ -248,125 +248,128 @@ class MyhomBbody extends GetWidget<HomeViewModel> {
 
   Widget _ListOfProduct(size, col) {
     return GetBuilder<HomeViewModel>(
-        builder: (controller) => Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(40.0),
+        builder: (controller) => SingleChildScrollView(
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(40.0),
+                  ),
+                  color: Colors.grey[200],
                 ),
-                color: Colors.grey[200],
-              ),
-              //color: Colors.grey[300],
-              //width: size.width * 0.9,
-              height: size.height * .6,
-              padding: EdgeInsets.only(
-                  top: size.height * 0.0005,
-                  bottom: size.height * 0.02,
-                  left: size.width * 0.02,
-                  right: size.width * 0.02),
-              child: ListView.separated(
-                itemCount: controller.productModel.length,
-                scrollDirection: Axis.vertical,
-                itemBuilder: (context, index) {
-                  return GestureDetector(
-                    onTap: () {
-                      Get.to(
-                        DetailViews(
-                          model: controller.productModel[index],
-                        ),
-                      );
-                    },
-                    child: Container(
-                      height: size.height * .16,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(40),
-                          //BorderRadius.only(topRight: Radius.circular(60)),
-                          //border: Border.all(color: Colors.black26),
-                          color: Colors.white),
-                      child: Row(
-                        //mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                              width: size.width * .3,
-                              height: size.height * .16,
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(40.0),
-                                    bottomLeft: Radius.circular(40.0)),
-                                child: Image.network(
-                                  controller.productModel[index].image,
-                                  fit: BoxFit.fill,
-                                ),
-                              )),
-                          SizedBox(
-                            width: size.width * 0.01,
-                          ),
-                          Container(
-                            padding: EdgeInsets.only(
-                                left: size.height * .002,
-                                right: size.height * .002,
-                                top: size.height * .015),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                CustomText(
-                                  text: controller.productModel[index].name,
-                                  alignment: Alignment.bottomLeft,
-                                  fontSize: 20,
-                                ),
-                                SizedBox(
-                                  height: size.height * 0.01,
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    SizedBox(
-                                      width: size.width * 0.025,
-                                    ),
-                                    Icon(
-                                      Icons.inventory_outlined,
-                                    ),
-                                    CustomText(
-                                      text: 'Stock  : ' +
-                                          controller.productModel[index].stock
-                                              .toString(),
-                                      color: Colors.grey,
-                                      alignment: Alignment.bottomLeft,
-                                      fontSize: 18,
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: size.height * 0.012,
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    SizedBox(
-                                      width: size.width * 0.025,
-                                    ),
-                                    Icon(
-                                      Icons.attach_money_outlined,
-                                    ),
-                                    CustomText(
-                                      text: controller.productModel[index].prix
-                                              .toString() +
-                                          'Dhs',
-                                      color: Colors.teal,
-                                      fontSize: 20,
-                                    ),
-                                  ],
-                                ),
-                              ],
+                //color: Colors.grey[300],
+                //width: size.width * 0.9,
+                height: size.height * .6,
+                padding: EdgeInsets.only(
+                    top: size.height * 0.0005,
+                    bottom: size.height * 0.02,
+                    left: size.width * 0.02,
+                    right: size.width * 0.02),
+                child: ListView.separated(
+                  itemCount: controller.productModel.length,
+                  scrollDirection: Axis.vertical,
+                  itemBuilder: (context, index) {
+                    return GestureDetector(
+                      onTap: () {
+                        Get.to(
+                          () => (DetailViews(
+                            model: controller.productModel[index],
+                          )),
+                        );
+                      },
+                      child: Container(
+                        height: size.height * .16,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(40),
+                            //BorderRadius.only(topRight: Radius.circular(60)),
+                            //border: Border.all(color: Colors.black26),
+                            color: Colors.white),
+                        child: Row(
+                          //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                                width: size.width * .3,
+                                height: size.height * .16,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(40.0),
+                                      bottomLeft: Radius.circular(40.0)),
+                                  child: Image.network(
+                                    controller.productModel[index].image,
+                                    fit: BoxFit.fill,
+                                  ),
+                                )),
+                            SizedBox(
+                              width: size.width * 0.01,
                             ),
-                          ),
-                        ],
+                            Container(
+                              padding: EdgeInsets.only(
+                                  left: size.height * .002,
+                                  right: size.height * .002,
+                                  top: size.height * .015),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  CustomText(
+                                    text: controller.productModel[index].name,
+                                    alignment: Alignment.bottomLeft,
+                                    fontSize: 20,
+                                  ),
+                                  SizedBox(
+                                    height: size.height * 0.01,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      SizedBox(
+                                        width: size.width * 0.025,
+                                      ),
+                                      Icon(
+                                        Icons.inventory_outlined,
+                                      ),
+                                      CustomText(
+                                        text: 'Stock  : ' +
+                                            controller.productModel[index].stock
+                                                .toString(),
+                                        color: Colors.grey,
+                                        alignment: Alignment.bottomLeft,
+                                        fontSize: 18,
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: size.height * 0.012,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      SizedBox(
+                                        width: size.width * 0.025,
+                                      ),
+                                      Icon(
+                                        Icons.attach_money_outlined,
+                                      ),
+                                      CustomText(
+                                        text: controller
+                                                .productModel[index].prix
+                                                .toString() +
+                                            'Dhs',
+                                        color: Colors.teal,
+                                        fontSize: 20,
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                  );
-                },
-                separatorBuilder: (context, index) => SizedBox(
-                  height: size.height * 0.02,
+                    );
+                  },
+                  separatorBuilder: (context, index) => SizedBox(
+                    height: size.height * 0.02,
+                  ),
                 ),
               ),
             ));

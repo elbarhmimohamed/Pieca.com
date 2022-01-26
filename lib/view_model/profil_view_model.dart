@@ -15,8 +15,8 @@ class ProfilViewModel extends GetxController {
 
   FirebaseAuth auth = FirebaseAuth.instance;
 
-  UserModel? get userModel => _userModel;
-  UserModel? _userModel;
+  UserModel get userModel => _userModel;
+  UserModel _userModel;
 
   Icon _icon = Icon(Icons.visibility);
   Icon get icon => _icon;
@@ -27,7 +27,7 @@ class ProfilViewModel extends GetxController {
   @override
   void onInit() async {
     super.onInit();
-    getCurrentUser();
+    await getCurrentUser();
   }
 
   void getCurrentUser() async {
@@ -35,6 +35,8 @@ class ProfilViewModel extends GetxController {
       _loding.value = true;
       await localStorageData.getUser.then((value) {
         _userModel = value;
+        print('rah--------------');
+        print(_userModel.role);
         update();
       });
       _loding.value = false;

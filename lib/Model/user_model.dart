@@ -1,16 +1,23 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 class UserModel {
-  String? userId, userName, email, role;
+  String userId, userName, email, role;
   // phone;
 
   UserModel({
-    required this.userId,
-    required this.userName,
-    required this.email,
-    required this.role,
+    this.userId,
+    this.userName,
+    this.email,
+    this.role,
     //required this.phone,
   });
 
-  factory UserModel.fromJson(Map<dynamic, dynamic> map) => UserModel(
+  String getRole() {
+    return this.role;
+  }
+
+  factory UserModel.fromJson(Map<String, dynamic> map) => UserModel(
         userId: map['userId'],
         userName: map['userName'],
         email: map['email'],

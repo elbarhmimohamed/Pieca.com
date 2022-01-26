@@ -249,7 +249,7 @@ class Summary extends StatelessWidget {
                         maxLine: 2,
                       ),
                       CustomText(
-                        text: '300 dh',
+                        text: '300.0 dh',
                         fontSize: 16,
                         maxLine: 2,
                       ),
@@ -264,7 +264,7 @@ class Summary extends StatelessWidget {
                         maxLine: 2,
                       ),
                       CustomText(
-                        text: '1100 dh',
+                        text: (controller.total + 300).toString() + 'dhs',
                         fontSize: 16,
                         maxLine: 2,
                       ),

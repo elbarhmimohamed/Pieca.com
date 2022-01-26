@@ -13,17 +13,17 @@ class PanierDatabase {
   // ignore: unused_field
 
   static final PanierDatabase db = PanierDatabase._();
-  static Database? _database;
+  static Database _database;
 
   Future<Database> get database async {
-    if (_database != null) return _database!;
+    if (_database != null) return _database;
     try {
       _database = await initDB();
     } catch (e) {
       print(e);
     }
 
-    return _database!;
+    return _database;
   }
 
   initDB() async {

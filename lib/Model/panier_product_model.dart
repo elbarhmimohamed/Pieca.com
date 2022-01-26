@@ -3,12 +3,12 @@ class PanierProductModel {
   int prix, qte, stock;
 
   PanierProductModel({
-    required this.idProduct,
-    required this.name,
-    required this.image,
-    required this.prix,
-    required this.qte,
-    required this.stock,
+    this.idProduct,
+    this.name,
+    this.image,
+    this.prix,
+    this.qte,
+    this.stock,
   });
 
   factory PanierProductModel.fromJson(Map<dynamic, dynamic> map) =>

@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:pieca/View/Auth/Signup/signup_view_model.dart';
 import 'package:pieca/helper/local_storage_data.dart';
+import 'package:pieca/view_model/Annonce_View_Model.dart';
 import 'package:pieca/view_model/auth_View_Model.dart';
 import 'package:pieca/view_model/commande_view_model.dart';
 import 'package:pieca/view_model/control_view_model.dart';
@@ -28,5 +29,6 @@ class Binding extends Bindings {
     Get.put<LocalStorageData>(LocalStorageData(), permanent: true);
     Get.put<ProfilViewModel>(ProfilViewModel(), permanent: true);
     Get.put<CommandeViewModel>(CommandeViewModel(), permanent: true);
+    Get.put<AnnonceViewModel>(AnnonceViewModel(), permanent: true);
   }
 }

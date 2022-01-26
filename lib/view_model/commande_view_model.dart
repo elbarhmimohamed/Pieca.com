@@ -1,10 +1,17 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pieca/Model/adress_model.dart';
+import 'package:pieca/Model/commande_model.dart';
+import 'package:pieca/Model/panier_product_model.dart';
+import 'package:pieca/Model/product_model.dart';
 import 'package:pieca/Model/user_model.dart';
+import 'package:pieca/View/home/homeView.dart';
 import 'package:pieca/helper/constant.dart';
 import 'package:pieca/helper/local_storage_data.dart';
+import 'package:pieca/service/home_service.dart';
 import 'package:pieca/view_model/panier_view_model.dart';
 
 class CommandeViewModel extends GetxController {
@@ -19,7 +26,7 @@ class CommandeViewModel extends GetxController {
   final LocalStorageData localStorageData = Get.put(LocalStorageData());
   final PanierViewModel panierViewModel = Get.put(PanierViewModel());
 
-  String? name, tele, adress, city, code;
+  String name, tele, adress, city, code;
   GlobalKey<FormState> globalKey = GlobalKey();
 
   int get index => _index;
@@ -52,12 +59,12 @@ class CommandeViewModel extends GetxController {
   ValueNotifier get loding => _loding;
   ValueNotifier<bool> _loding = ValueNotifier(false);
 
-  UserModel? get userModel => _userModel;
-  UserModel? _userModel;
+  UserModel get userModel => _userModel;
+  UserModel _userModel;
 
-  AdressModel? get adressModel => _adressModel;
-  AdressModel? _adressModel;
-  DateTime? valuedate;
+  AdressModel get adressModel => _adressModel;
+  AdressModel _adressModel;
+  DateTime valuedate;
 
   // ignore: must_call_super
 
@@ -90,8 +97,8 @@ class CommandeViewModel extends GetxController {
         update();
         break;
       case 2:
-        globalKey.currentState!.save();
-        if (globalKey.currentState!.validate()) {
+        globalKey.currentState.save();
+        if (globalKey.currentState.validate()) {
           saveCommandeData();
           _pages = Pages.payement;
           _index = i;
@@ -176,7 +183,7 @@ class CommandeViewModel extends GetxController {
     _adressModel = AdressModel(
         name: name, adress: adress, tele: tele, city: city, code: code);
     update();
-    print(_adressModel!.name);
+    print(_adressModel.name);
   }
 
   changdIsOk(value) {
@@ -217,4 +224,51 @@ class CommandeViewModel extends GetxController {
       }
     }
   }
+
+  //-----------------------------
+
+  List<PanierProductModel> _listofproduct;
+  List<PanierProductModel> get listofproduct => _listofproduct;
+
+  List<String> _listofidofproduct;
+  List<String> get listofidofproduct => _listofidofproduct;
+
+  void getListofProduct() {
+    _listofproduct = panierViewModel.listofproduct;
+    update();
+  }
+
+  DateTime today = new DateTime.now();
+  //------------------------------
+
+  //-----------------------------
+  saveCmd() async {
+    await getListofProduct();
+    await getCurrentUser();
+    CommandeModel commandeModel = CommandeModel(
+      idCmd: genererID(),
+      idUserCmd: userModel.userId,
+      date: today.toString(),
+      listofidofproduct: listofproduct,
+      prix: prixTotal,
+    );
+    Homeservice().addCmdToFirebase(commandeModel);
+    Get.offAll(() => HomeView());
+  }
+
+  //-------------------------------
+  String genererID() {
+    String Caracters = "123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    String RandomString = "";
+    int lengthS = 20;
+    Random rand = new Random();
+    var text;
+
+    for (var i = 0; i < 20; i++) {
+      RandomString += Caracters[rand.nextInt(lengthS)];
+    }
+    return RandomString;
+  }
+  //--------------------------------
+
 }

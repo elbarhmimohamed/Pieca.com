@@ -1,12 +1,10 @@
-import 'dart:ffi';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:pieca/view_model/auth_View_Model.dart';
+import 'package:select_form_field/select_form_field.dart';
 
-class CustomTextFiled extends StatelessWidget {
+class CustomSelectedFiled extends StatelessWidget {
   final Function(String) onsave;
 
   final String Function(String) onvalide;
@@ -19,19 +17,19 @@ class CustomTextFiled extends StatelessWidget {
   final String helper;
   final String initval;
   final List<TextInputFormatter> txtf;
-
-  CustomTextFiled({
-    this.onsave,
-    this.onvalide,
-    this.hinttext,
-    this.labeltext,
-    this.icon,
-    this.input,
-    this.obscuretext = false,
-    this.helper,
-    this.initval,
-    this.txtf,
-  });
+  final List<Map<String, dynamic>> items;
+  CustomSelectedFiled(
+      {this.onsave,
+      this.onvalide,
+      this.hinttext,
+      this.labeltext,
+      this.icon,
+      this.input,
+      this.obscuretext = false,
+      this.helper,
+      this.initval,
+      this.txtf,
+      this.items});
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +40,9 @@ class CustomTextFiled extends StatelessWidget {
                 SizedBox(
                   height: size.height * 0.03,
                 ),
-                TextFormField(
+                SelectFormField(
+                  type: SelectFormFieldType.dropdown,
+                  items: items,
                   inputFormatters: txtf,
                   initialValue: initval,
                   onSaved: onsave,

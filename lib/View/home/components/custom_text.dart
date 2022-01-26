@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CustomText extends StatelessWidget {
-  final String? text;
+  final String text;
 
   final double fontSize;
 
@@ -31,7 +31,7 @@ class CustomText extends StatelessWidget {
       ),
       alignment: alignment,
       child: Text(
-        text!,
+        text,
         style: TextStyle(
           color: color,
           height: height,

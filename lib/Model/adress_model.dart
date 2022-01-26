@@ -1,14 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AdressModel {
-  String? name, tele, adress, city, code;
+  String name, tele, adress, city, code;
 
   AdressModel({
-    required this.name,
-    required this.tele,
-    required this.adress,
-    required this.city,
-    required this.code,
+    this.name,
+    this.tele,
+    this.adress,
+    this.city,
+    this.code,
   });
   factory AdressModel.fromJson(QueryDocumentSnapshot<Object> map) =>
       new AdressModel(

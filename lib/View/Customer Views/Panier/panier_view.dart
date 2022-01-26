@@ -178,54 +178,53 @@ class PanierView extends GetWidget<HomeViewModel> {
                                         color: Colors.teal,
                                         fontSize: 20,
                                       ),
+                                      CustomText(
+                                        text: 'Max : ' +
+                                            controller
+                                                .listofproduct[index].stock
+                                                .toString(),
+                                        fontSize: 18,
+                                      ),
                                       SizedBox(
                                         height: size.height * 0.01,
                                       ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Container(
-                                            width: size.width * .3,
-                                            height: size.height * .04,
-                                            color: Colors.grey[300],
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                GestureDetector(
-                                                  onTap: () {
-                                                    controller
-                                                        .decreaseQte(index);
-                                                  },
-                                                  child: Icon(
-                                                    Icons.remove,
-                                                  ),
-                                                ),
-                                                CustomText(
-                                                  text: controller
-                                                      .listofproduct[index].qte
-                                                      .toString(),
-                                                  alignment: Alignment.center,
-                                                  fontSize: 20,
-                                                ),
-                                                GestureDetector(
-                                                  onTap: () {
-                                                    controller.increaseQte(
-                                                        index,
-                                                        controller
-                                                            .listofproduct[
-                                                                index]
-                                                            .stock);
-                                                  },
-                                                  child: Icon(
-                                                    Icons.add,
-                                                  ),
-                                                ),
-                                              ],
+                                      Container(
+                                        width: size.width * .3,
+                                        height: size.height * .04,
+                                        color: Colors.grey[300],
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            GestureDetector(
+                                              onTap: () {
+                                                controller.decreaseQte(index);
+                                              },
+                                              child: Icon(
+                                                Icons.remove,
+                                              ),
                                             ),
-                                          ),
-                                        ],
+                                            CustomText(
+                                              text: controller
+                                                  .listofproduct[index].qte
+                                                  .toString(),
+                                              alignment: Alignment.center,
+                                              fontSize: 20,
+                                            ),
+                                            GestureDetector(
+                                              onTap: () {
+                                                controller.increaseQte(
+                                                    index,
+                                                    controller
+                                                        .listofproduct[index]
+                                                        .stock);
+                                              },
+                                              child: Icon(
+                                                Icons.add,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ],
                                   ),
@@ -233,7 +232,7 @@ class PanierView extends GetWidget<HomeViewModel> {
                               ),
                               Container(
                                 //color: Colors.amber,
-                                width: size.width * .3,
+                                width: size.width * .2,
                                 child: Column(
                                   children: [
                                     Container(
@@ -250,12 +249,6 @@ class PanierView extends GetWidget<HomeViewModel> {
                                           Icons.close_outlined,
                                         ),
                                       ),
-                                    ),
-                                    CustomText(
-                                      text: 'Max : ' +
-                                          controller.listofproduct[index].stock
-                                              .toString(),
-                                      fontSize: 18,
                                     ),
                                   ],
                                 ),
